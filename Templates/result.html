@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="/static/result_style.css">
+    <title>Validation Result</title>
+</head>
+<body>
+    <h1>Validation Result</h1>
+    <table id="resultTable">
+        <thead>
+            <tr>
+                <th>Table Name</th>
+                <th>Oracle</th>
+                <th>PostgreSQL</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for table_name, counts in table_counts.items() %}
+            <tr>
+                <td>{{ table_name }}</td>
+                <td>{{ counts['oracle'] }}</td>
+                <td>{{ counts['postgres'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <script>
+        $(document).ready(function() {
+            $('#resultTable').DataTable();
+        });
+    </script>
+</body>
+</html>
