@@ -14,7 +14,7 @@ This Flask application allows users to validate data from Oracle and PostgreSQL 
 2. Navigate to the project directory in your terminal.
 
 ## Setup
-1. Install dependencies by running:
+1. Install dependencies by running: "pip install -r requirements.txt"
 2. Configure database credentials:
 - Open `app.py` and modify the database connection settings (Oracle and PostgreSQL) as per your environment.
 
@@ -26,7 +26,7 @@ This Flask application allows users to validate data from Oracle and PostgreSQL 
 
 ## Troubleshooting
 - If you encounter any issues during installation or usage, please refer to the error messages or consult the documentation.
-- For further assistance, feel free to contact the application developer.
+- For further assistance, feel free to contact the application developer(Mr. Sultan Mamud).
 
 ## License
 This project is licensed under the name Sultan Mamud :).
