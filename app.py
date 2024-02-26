@@ -16,8 +16,10 @@ def connect_to_oracle(username, password, host, port, service_name, mode=cx_Orac
     return conn
 
 # Route for the home page
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST']) #GET: accessing data from server to client
 def index():
+    #client to server - POST 
+    #eg: filling out a web form.
     if request.method == 'POST':
         # Get form data
         oracle_username = request.form['oracle_username']
@@ -32,28 +34,13 @@ def index():
         postgres_user = request.form['postgres_user']
         postgres_password = request.form['postgres_password']
 
-        # Store recent connection details in global list
-        recent_connection = {
-            'oracle_username': oracle_username,
-            'oracle_password': oracle_password,
-            'oracle_host': oracle_host,
-            'oracle_port': oracle_port,
-            'oracle_service_name': oracle_service_name,
-            'postgres_host': postgres_host,
-            'postgres_port': postgres_port,
-            'postgres_dbname': postgres_dbname,
-            'postgres_user': postgres_user,
-            'postgres_password': postgres_password
-        }
-
         # Get table names input
         table_names = request.form['table_names']
         table_names_list = [name.strip() for name in table_names.split(",")]
 
         # Connect to Oracle and PostgreSQL databases
         oracle_conn = connect_to_oracle(oracle_username, oracle_password, oracle_host, oracle_port, oracle_service_name)
-        postgres_conn = connect_to_postgres(postgres_host, postgres_port, postgres_dbname, postgres_user,
-                                            postgres_password)
+        postgres_conn = connect_to_postgres(postgres_host, postgres_port, postgres_dbname, postgres_user,postgres_password)
 
         # Check if the table exists in Oracle and PostgreSQL databases
         oracle_cursor = oracle_conn.cursor()
@@ -64,6 +51,7 @@ def index():
             for table_name in table_names_list:
                 oracle_row_count = 'NA'
                 postgres_row_count = 'NA'
+                difference = 'NA'
 
                 # Query Oracle database for row count
                 try:
@@ -79,8 +67,11 @@ def index():
                 except psycopg2.DatabaseError:
                     pass  # Table not found in PostgreSQL, row count remains 'NA'
 
-                table_counts[table_name] = {'oracle': oracle_row_count, 'postgres': postgres_row_count}
+                # Calculate difference only if both row counts are numeric
+                if isinstance(oracle_row_count, int) and isinstance(postgres_row_count, int):
+                    difference = oracle_row_count - postgres_row_count
 
+                table_counts[table_name] = {'oracle': oracle_row_count, 'postgres': postgres_row_count, 'difference': difference}
             return render_template('result.html', table_counts=table_counts)
         except (cx_Oracle.DatabaseError, psycopg2.DatabaseError) as e:
             return render_template('error.html', message=f"Error: {e}")

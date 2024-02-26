@@ -17,6 +17,7 @@
                 <th>Table Name</th>
                 <th>Oracle</th>
                 <th>PostgreSQL</th>
+                <th>Difference</th>
             </tr>
         </thead>
         <tbody>
@@ -25,11 +26,11 @@
                 <td>{{ table_name }}</td>
                 <td>{{ counts['oracle'] }}</td>
                 <td>{{ counts['postgres'] }}</td>
+                <td>{{ counts['difference'] }}</td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
-
     <script>
         $(document).ready(function() {
             $('#resultTable').DataTable();
