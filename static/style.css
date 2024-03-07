@@ -1,27 +1,75 @@
-/* Basic styling */
-h1{
-    size: 2px;
-    justify-content: c;
-}
-body {
-    font-family: sans-serif;
+/* Reset default browser styles */
+* {
     margin: 0;
-    padding: 20px;
-    background-color: #cccccc; /* 60% light grey */
+    padding: 0;
+    box-sizing: border-box;
 }
 
-/* Form container */
+/* Global styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #dddddd;
+    color: #333;
+    line-height: 1.6;
+}
+
 .container {
-    max-width: 600px; /* Adjust as needed */
-    margin: 0 auto;
+    max-width: 600px;
+    margin: 50px auto;
     padding: 20px;
-    border-radius: 5px;
+    background-color: #ffffff92;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Form fields */
+h1, h2 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
 .form {
     display: flex;
     flex-direction: column;
+}
+
+.field {
+    margin-bottom: 15px;
+}
+
+label {
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="number"],
+input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="number"]:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+.button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #0056b3;
 }
 
 .credentials-container {
@@ -29,41 +77,29 @@ body {
     justify-content: space-between;
 }
 
-.oracle-credentials, .postgres-credentials {
+.oracle-credentials,
+.postgres-credentials {
     flex: 1;
+    padding: 0 10px;
 }
 
-.field {
-    margin: 5px 0;
+.oracle-credentials h2,
+.postgres-credentials h2 {
+    margin-bottom: 10px;
 }
 
-label {
-    color: #333; /* 30% pure white */
+/* Responsive styles */
+@media screen and (max-width: 600px) {
+    .container {
+        margin: 20px;
+        padding: 10px;
+    }
 }
 
-input[type="text"], input[type="number"], input[type="password"] {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    background-color: #f0f8ff; /* 10% green */
-}
-
-input[type="submit"] {
-    margin: 2% 40%;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    background-color: #4CAF50; /* green */
-    color: white;
-    cursor: pointer;
-}
-
-input[type="submit"]:hover {
-    background-color: #ffffff; /* darker green */   
-    appearance: none;
-    border: 1px solid rgba(27, 31, 35, .15);
-    border-radius: 6px;
-    box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
-    box-sizing: border-box;
-    color: #000000;
+/* Custom icon styling */
+.icon {
+    display: block;
+    margin: 0 auto 20px;
+    width: 100px;
+    height: 100px;
 }
